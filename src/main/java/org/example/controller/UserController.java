@@ -17,28 +17,35 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    public UserController (UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
-    @GetMapping ("/greeting")
-    String helloGreeting () {
+
+    @GetMapping("/greeting")
+    String helloGreeting() {
         return "Hello! It's a greeting page from your web service (test response).";
     }
 
-    @GetMapping ("/getBalance/{user_id}")
-    Users getBalanceById (@PathVariable Long user_id){
+    @GetMapping("/getBalance/{user_id}")
+    Users getBalanceById(@PathVariable Long user_id) {
         return userService.getBalance(user_id);
     }
 
-    @GetMapping ("/getUser/{id}")
-    Optional<Users> getUserById (@PathVariable Long id) {
+    @GetMapping("/getUser/{id}")
+    Optional<Users> getUserById(@PathVariable Long id) {
         return userService.getUser(id);
     }
 
-    @PutMapping ("/putMoney/{id}/{income}")
-    void putMoney (@PathVariable Long id, @PathVariable BigDecimal income) {
+    @PutMapping("/putMoney/{id}/{income}")
+    void putMoney(@PathVariable Long id, @PathVariable BigDecimal income) {
 //    Optional<Users> putMoney (@PathVariable Long id, @PathVariable BigDecimal income) {
         userService.putMoney(id, income);
 //        return userService.getBalance(id);
     }
+
+    @PutMapping("/takeMoney/{id}/{draw}")
+    void takeMoney(@PathVariable Long id, @PathVariable BigDecimal draw) {
+        userService.takeMoney(id, draw);
+    }
+
 }

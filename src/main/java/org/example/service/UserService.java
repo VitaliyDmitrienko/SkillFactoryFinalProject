@@ -36,4 +36,15 @@ public class UserService  {
         userRepository.save(currentUser);
     }
 
+    public boolean takeMoney (long user_id, BigDecimal draw) {
+        final var currentUser = userRepository.findById(user_id).orElseThrow();
+        BigDecimal currentBalance = currentUser.getBalance();
+        if (currentBalance.compareTo(draw) >=0 ) {
+            BigDecimal newBalance = currentUser.getBalance().subtract(draw);
+            currentUser.setBalance(newBalance);
+            userRepository.save(currentUser);
+            return true;
+        } else return false;
+    }
+
 }
