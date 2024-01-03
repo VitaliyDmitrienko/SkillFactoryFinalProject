@@ -21,12 +21,15 @@ public class UserService  {
         this.userRepository=userRepository;
     }
 
-    public Optional<Users> getUser (long id) {
-        return userRepository.findById(id);
+    public Users getUser (long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
-    public Users getBalance (long users_id) {
-        return userRepository.findById(users_id).orElse(null);
+    public Optional<Users> getBalance (long user_id) {
+        if (getUser(user_id).equals(null)) { return Optional.empty();}
+        else {
+            return userRepository.findById(user_id);
+        }
     }
 
     public void putMoney (long user_id, BigDecimal income) {
