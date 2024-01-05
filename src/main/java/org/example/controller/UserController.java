@@ -29,41 +29,39 @@ public class UserController {
     }
 
     @GetMapping("/getBalance/{user_id}")
-    Optional<Users> restGetBalanceById(@PathVariable Long user_id) {
-        return userService.getBalance(user_id);
+    ResponseEntity<?> restGetBalanceById(@PathVariable Long user_id) {
+//        return userService.getBalance(user_id);
+        return restGetUserById(user_id);
     }
 
-    @GetMapping("/getUser/{id}")
-    ResponseEntity<?> restGetUserById(@PathVariable Long id) {
-//        Users temp/ser = userService.getUser(id);
-//        if ((tempUser == null)) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
-//        else {
+    @GetMapping("/getUser/{user_id}")
+    ResponseEntity<?> restGetUserById(@PathVariable Long user_id) {
             try {
-                return new ResponseEntity<Users>((userService.getUser(id)), HttpStatus.OK);
+                return new ResponseEntity<>((userService.getUser(user_id)), HttpStatus.OK);
             } catch (Exception e) {
                 return new ResponseEntity<>(new AppError(HttpStatus.NOT_FOUND.value(),
-                        "User with id " + id + " not found / not exist."),
+                        "User with id " + user_id + " not found / not exist."),
                         HttpStatus.NOT_FOUND);
             }
-//        }
     }
 
-    @PutMapping("/putMoney/{id}/{income}")
-    ResponseEntity <Optional<Users>> restPutMoney(@PathVariable Long id, @PathVariable BigDecimal income) {
+    @PutMapping("/putMoney/{user_id}/{income}")
+    ResponseEntity <?> restPutMoney(@PathVariable Long user_id, @PathVariable BigDecimal income) {
 //    Optional<Users> putMoney (@PathVariable Long id, @PathVariable BigDecimal income) {
         try {
-            return new ResponseEntity<Optional<Users>> ((userService.putMoney(id, income)), HttpStatus.OK);
+            return new ResponseEntity<> ((userService.putMoney(user_id, income)), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new AppError(HttpStatus.NOT_FOUND.value(),
+                    "User with id " + user_id + " not found / not exist."),
+                    HttpStatus.NOT_FOUND);
         }
 //        userService.putMoney(id, income);
 //        return userService.getBalance(id);
     }
 
-    @PutMapping("/takeMoney/{id}/{draw}")
-    void restTakeMoney(@PathVariable Long id, @PathVariable BigDecimal draw) {
-        userService.takeMoney(id, draw);
-    }
+//    @PutMapping("/takeMoney/{user_id}/{draw}")
+//    void restTakeMoney(@PathVariable Long id, @PathVariable BigDecimal draw) {
+//        userService.takeMoney(id, draw);
+//    }
 
 }

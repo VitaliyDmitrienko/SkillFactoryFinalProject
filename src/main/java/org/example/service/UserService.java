@@ -33,26 +33,26 @@ public class UserService  {
     }
 
     public Optional<Users> putMoney (long user_id, BigDecimal income) {
-        try {
-            final var currentUser = userRepository.findById(user_id).orElseThrow();
+//        try {
+            final var currentUser = getUser(user_id);
             BigDecimal newBalance = currentUser.getBalance().add(income);
             currentUser.setBalance(newBalance);
             userRepository.save(currentUser);
             return userRepository.findById(user_id);
-        } catch (Exception e)  {
-            return Optional.empty();
+//        } catch (Exception e)  {
+//            return Optional.empty();
         }
-    }
 
-    public boolean takeMoney (long user_id, BigDecimal draw) {
-        final var currentUser = userRepository.findById(user_id).orElseThrow();
-        BigDecimal currentBalance = currentUser.getBalance();
-        if (currentBalance.compareTo(draw) >=0 ) {
-            BigDecimal newBalance = currentUser.getBalance().subtract(draw);
-            currentUser.setBalance(newBalance);
-            userRepository.save(currentUser);
-            return true;
-        } else return false;
-    }
+
+//    public Optional<Users> takeMoney (long user_id, BigDecimal draw) {
+//        final var currentUser = userRepository.findById(user_id).orElseThrow();
+//        BigDecimal currentBalance = currentUser.getBalance();
+//        if (currentBalance.compareTo(draw) >=0 ) {
+//            BigDecimal newBalance = currentUser.getBalance().subtract(draw);
+//            currentUser.setBalance(newBalance);
+//            userRepository.save(currentUser);
+//            return true;
+//        } else return false;
+//    }
 
 }
