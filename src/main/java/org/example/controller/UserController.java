@@ -59,9 +59,15 @@ public class UserController {
 //        return userService.getBalance(id);
     }
 
-//    @PutMapping("/takeMoney/{user_id}/{draw}")
-//    void restTakeMoney(@PathVariable Long id, @PathVariable BigDecimal draw) {
-//        userService.takeMoney(id, draw);
-//    }
+    @PutMapping("/takeMoney/{user_id}/{draw}")
+    ResponseEntity <?> restTakeMoney(@PathVariable Long user_id, @PathVariable BigDecimal draw) {
+        try {
+            return new ResponseEntity<> ((userService.takeMoney(user_id, draw)), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new AppError(HttpStatus.NOT_FOUND.value(),
+                    "User with id " + user_id + " not found / not exist."),
+                    HttpStatus.NOT_FOUND);
+        }
+    }
 
 }

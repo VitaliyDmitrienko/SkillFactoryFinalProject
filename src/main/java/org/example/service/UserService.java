@@ -44,15 +44,15 @@ public class UserService  {
         }
 
 
-//    public Optional<Users> takeMoney (long user_id, BigDecimal draw) {
-//        final var currentUser = userRepository.findById(user_id).orElseThrow();
-//        BigDecimal currentBalance = currentUser.getBalance();
-//        if (currentBalance.compareTo(draw) >=0 ) {
-//            BigDecimal newBalance = currentUser.getBalance().subtract(draw);
-//            currentUser.setBalance(newBalance);
-//            userRepository.save(currentUser);
-//            return true;
-//        } else return false;
-//    }
+    public Optional<Users> takeMoney (long user_id, BigDecimal draw) {
+        final var currentUser = getUser(user_id);
+        BigDecimal currentBalance = currentUser.getBalance();
+        if (currentBalance.compareTo(draw) >=0 ) {
+            BigDecimal newBalance = currentUser.getBalance().subtract(draw);
+            currentUser.setBalance(newBalance);
+            userRepository.save(currentUser);
+            return userRepository.findById(user_id);
+        } else return Optional.empty();
+    }
 
 }
