@@ -1,12 +1,12 @@
 package org.example.controller;
 
-import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.example.entity.Users;
+import org.example.error.AppError;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -34,23 +34,30 @@ public class UserController {
     }
 
     @GetMapping("/getUser/{id}")
-    ResponseEntity<Users> restGetUserById(@PathVariable Long id) {
-        Users tempUser = userService.getUser(id);
-        if ((tempUser == null)) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
-        else {
+    ResponseEntity<?> restGetUserById(@PathVariable Long id) {
+//        Users temp/ser = userService.getUser(id);
+//        if ((tempUser == null)) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
+//        else {
             try {
-                return new ResponseEntity<>((userService.getUser(id)), HttpStatus.OK);
+                return new ResponseEntity<Users>((userService.getUser(id)), HttpStatus.OK);
             } catch (Exception e) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(new AppError(HttpStatus.NOT_FOUND.value(),
+                        "User with id " + id + " not found / not exist."),
+                        HttpStatus.NOT_FOUND);
             }
-        }
+//        }
     }
 
     @PutMapping("/putMoney/{id}/{income}")
-    void restPutMoney(@PathVariable Long id, @PathVariable BigDecimal income) {
+    ResponseEntity <Optional<Users>> restPutMoney(@PathVariable Long id, @PathVariable BigDecimal income) {
 //    Optional<Users> putMoney (@PathVariable Long id, @PathVariable BigDecimal income) {
-        userService.putMoney(id, income);
+        try {
+            return new ResponseEntity<Optional<Users>> ((userService.putMoney(id, income)), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+//        userService.putMoney(id, income);
 //        return userService.getBalance(id);
     }
 

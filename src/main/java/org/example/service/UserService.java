@@ -22,21 +22,26 @@ public class UserService  {
     }
 
     public Users getUser (long id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow();
     }
 
     public Optional<Users> getBalance (long user_id) {
-        if (getUser(user_id).equals(null)) { return Optional.empty();}
-        else {
+//        if (getUser(user_id).equals(null)) { return Optional.empty();}
+//        else {
             return userRepository.findById(user_id);
-        }
+//        }
     }
 
-    public void putMoney (long user_id, BigDecimal income) {
-        final var currentUser = userRepository.findById(user_id).orElseThrow();
-        BigDecimal newBalance = currentUser.getBalance().add(income);
-        currentUser.setBalance(newBalance);
-        userRepository.save(currentUser);
+    public Optional<Users> putMoney (long user_id, BigDecimal income) {
+        try {
+            final var currentUser = userRepository.findById(user_id).orElseThrow();
+            BigDecimal newBalance = currentUser.getBalance().add(income);
+            currentUser.setBalance(newBalance);
+            userRepository.save(currentUser);
+            return userRepository.findById(user_id);
+        } catch (Exception e)  {
+            return Optional.empty();
+        }
     }
 
     public boolean takeMoney (long user_id, BigDecimal draw) {
