@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.entity.Users;
+import org.example.exception.InsufficientBalanceException;
 import org.example.exception.UserNotFoundException;
 import org.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class UserService  {
 
     public Users getUser (long user_id) {
         return userRepository.findById(user_id).
-                orElseThrow(() -> new UserNotFoundException("User with id " + user_id + " not found / not exist."));
+                orElseThrow(() -> new UserNotFoundException("User with ID=" + user_id + " not found / not exist."));
     }
 
     public Users getBalance (long user_id) {
@@ -30,15 +31,12 @@ public class UserService  {
     }
 
     public Optional<Users> putMoney (long user_id, BigDecimal income) {
-//        try {
             final var currentUser = getUser(user_id);
             BigDecimal newBalance = currentUser.getBalance().add(income);
             currentUser.setBalance(newBalance);
             userRepository.save(currentUser);
             return userRepository.findById(user_id);
-//        } catch (Exception e)  {
-//            return Optional.empty();
-        }
+    }
 
 
     public Users takeMoney (long user_id, BigDecimal draw) {
@@ -49,7 +47,8 @@ public class UserService  {
             currentUser.setBalance(newBalance);
             userRepository.save(currentUser);
             return getUser(user_id);
-        } else return new Users();
+        } else throw new InsufficientBalanceException("Operation: draw can't be execute." +
+                " User with ID=" + user_id + " current balance lesser than draw.");
     }
 
 }

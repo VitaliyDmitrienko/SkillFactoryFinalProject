@@ -14,6 +14,12 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public AppErrorMessage resourceNotFoundException(UserNotFoundException ex, WebRequest request) {
-        return new AppErrorMessage (HttpStatus.NOT_FOUND.value(), ex.getMessage(), new Date());
+        return new AppErrorMessage (-1, ex.getMessage(), new Date());
+    }
+
+    @ExceptionHandler(InsufficientBalanceException.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public AppErrorMessage insufficientBalanceException (InsufficientBalanceException ex, WebRequest request) {
+        return new AppErrorMessage(0, ex.getMessage(), new Date());
     }
 }
