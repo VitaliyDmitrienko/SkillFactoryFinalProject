@@ -1,8 +1,7 @@
 package org.example.service;
 
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.example.entity.Users;
+import org.example.exception.UserNotFoundException;
 import org.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,15 +20,13 @@ public class UserService  {
         this.userRepository=userRepository;
     }
 
-    public Users getUser (long id) {
-        return userRepository.findById(id).orElseThrow();
+    public Users getUser (long user_id) {
+        return userRepository.findById(user_id).
+                orElseThrow(() -> new UserNotFoundException("User with id " + user_id + " not found / not exist."));
     }
 
-    public Optional<Users> getBalance (long user_id) {
-//        if (getUser(user_id).equals(null)) { return Optional.empty();}
-//        else {
-            return userRepository.findById(user_id);
-//        }
+    public Users getBalance (long user_id) {
+            return getUser(user_id);
     }
 
     public Optional<Users> putMoney (long user_id, BigDecimal income) {
@@ -44,15 +41,15 @@ public class UserService  {
         }
 
 
-    public Optional<Users> takeMoney (long user_id, BigDecimal draw) {
+    public Users takeMoney (long user_id, BigDecimal draw) {
         final var currentUser = getUser(user_id);
         BigDecimal currentBalance = currentUser.getBalance();
         if (currentBalance.compareTo(draw) >=0 ) {
             BigDecimal newBalance = currentUser.getBalance().subtract(draw);
             currentUser.setBalance(newBalance);
             userRepository.save(currentUser);
-            return userRepository.findById(user_id);
-        } else return Optional.empty();
+            return getUser(user_id);
+        } else return new Users();
     }
 
 }
