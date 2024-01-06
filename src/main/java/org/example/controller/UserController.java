@@ -36,7 +36,7 @@ public class UserController {
 
     @GetMapping("/getBalance/{user_id}")
     ResponseEntity<?> restGetBalanceById(@PathVariable Long user_id) {
-        return restGetUserById(user_id);
+        return new ResponseEntity<>((userService.getBalance(user_id)), HttpStatus.OK);
     }
 
     @PutMapping("/putMoney/{user_id}/{income}")
