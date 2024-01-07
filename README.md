@@ -15,3 +15,12 @@ Released three (REST) methods:
    in wrong case - {"statusCode":0,"message":"User with ID=4 not found / not exist.","timestamp":"2024-01-06T16:13:52.773+00:00"}
    or {statusCode":0,"message":"Operation: draw can't be executed. User with ID=3 current balance lesser than draw.","timestamp":"2024-01-06T16:13:52.773+00:00"}.
 ![2024-01-07_13-32-15](https://github.com/VitaliyDmitrienko/SkillFactoryFinalProject/assets/122961378/a3fcd75f-6694-4439-91b3-6f326f1603d0)
+
+07-jan-2024.
+Interstage.
+Add Swagger (OpenAPI) v3 integration.
+http://localhost:8080/v3/api-docs
+http://localhost:8080/swagger-ui/index.html#
+
+![img.png](img.png)
+![img_1.png](img_1.png)
