@@ -1,9 +1,8 @@
 package org.example.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.exception.AppErrorMessage;
 import org.example.exception.AppResponseMessage;
-import org.example.service.UserService;
+import org.example.service.DepositorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +14,13 @@ import java.util.Date;
 @Slf4j
 @RestController
 //@RequiredArgsConstructor
-public class UserController {
+public class DepositorController {
 
-    private final UserService userService;
+    private final DepositorService depositorService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public DepositorController (DepositorService depositorService) {
+        this.depositorService = depositorService;
     }
 
     @GetMapping("/greeting")
@@ -31,24 +30,24 @@ public class UserController {
 
     @GetMapping("/getUser/{user_id}")
     ResponseEntity<?> restGetUserById(@PathVariable Long user_id) {
-        return new ResponseEntity<>((userService.getUser(user_id)), HttpStatus.OK);
+        return new ResponseEntity<>((depositorService.getUser(user_id)), HttpStatus.OK);
     }
 
     @GetMapping("/getBalance/{user_id}")
     ResponseEntity<?> restGetBalanceById(@PathVariable Long user_id) {
-        return new ResponseEntity<>((userService.getBalance(user_id)), HttpStatus.OK);
+        return new ResponseEntity<>((depositorService.getBalance(user_id)), HttpStatus.OK);
     }
 
     @PutMapping("/putMoney/{user_id}/{income}")
     ResponseEntity <?> restPutMoney(@PathVariable Long user_id, @PathVariable BigDecimal income) {
-        userService.putMoney(user_id, income);
+        depositorService.putMoney(user_id, income);
         return new ResponseEntity<> (new AppResponseMessage(1, new Date()), HttpStatus.OK);
     }
 
     @PutMapping("/takeMoney/{user_id}/{draw}")
     ResponseEntity <?> restTakeMoney(@PathVariable Long user_id, @PathVariable BigDecimal draw) {
         String successfulMethodResponse = "1";
-        userService.takeMoney(user_id, draw);
+        depositorService.takeMoney(user_id, draw);
         return new ResponseEntity<> (new AppResponseMessage(1, new Date()), HttpStatus.OK);
     }
 
