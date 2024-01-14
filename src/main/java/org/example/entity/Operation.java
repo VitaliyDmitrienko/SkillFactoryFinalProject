@@ -20,10 +20,10 @@ public class Operation {
     private Long depositor_id;
 
     @Column (name = "OPERATION_TYPE")
-    private Long operation_type;
+    private int operation_type;
 
     @Column (name = "CHANGEBALANCE")
-    private BigDecimal changebalance;
+    private BigDecimal changeBalance;
 
     @Column (name = "OPERATION_DATE")
     private Date operation_date;

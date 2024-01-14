@@ -24,3 +24,10 @@ http://localhost:8080/swagger-ui/index.html#
 
 ![img.png](img.png)
 ![img_1.png](img_1.png)
+
+14-jan-2024.
+Stage #2 (getOperationList).
+Create table "operation" in DB (sffp).
+Add Entity "Operation". Add OperationRepository + OperationService.
+
+![img_2.png](img_2.png)
