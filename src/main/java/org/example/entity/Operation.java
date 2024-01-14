@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -26,6 +27,6 @@ public class Operation {
     private BigDecimal changeBalance;
 
     @Column (name = "OPERATION_DATE")
-    private Date operation_date;
+    private LocalDateTime operation_date;
 
 }

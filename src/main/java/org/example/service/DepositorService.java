@@ -1,5 +1,7 @@
 package org.example.service;
 
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.example.entity.Depositor;
 import org.example.exception.InsufficientBalanceException;
 import org.example.exception.UserNotFoundException;
@@ -16,9 +18,13 @@ import java.math.BigDecimal;
 public class DepositorService  {
 
     private final DepositorRepository depositorRepository;
+    private final OperationService operationService;
+    private final int putMoneyOperationType = 1;
+    private final int takeMoneyOperationType = 2;
     @Autowired
-    public DepositorService (DepositorRepository depositorRepository) {
+    public DepositorService (DepositorRepository depositorRepository, OperationService operationService) {
         this.depositorRepository=depositorRepository;
+        this.operationService = operationService;
     }
 
     public Depositor getUser (long user_id) {
@@ -37,6 +43,7 @@ public class DepositorService  {
             BigDecimal newBalance = currentUser.getBalance().add(income);
             currentUser.setBalance(newBalance);
             depositorRepository.save(currentUser);
+            operationService.storeOperation(currentUser.getId(), putMoneyOperationType, income);
             depositorRepository.findById(user_id);
     }
 
