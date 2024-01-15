@@ -22,12 +22,12 @@ Add Swagger (OpenAPI) v3 integration.
 http://localhost:8080/v3/api-docs
 http://localhost:8080/swagger-ui/index.html#
 
-![img.png](img.png)
-![img_1.png](img_1.png)
+![img.png](src/main/resources/image/img.png)
+![img_1.png](src/main/resources/image/img_1.png)
 
 14-jan-2024.
 Stage #2 (getOperationList).
 Create table "operation" in DB (sffp).
 Add Entity "Operation". Add OperationRepository + OperationService.
 
-![img_2.png](img_2.png)
+![img_2.png](src/main/resources/image/img_2.png)
