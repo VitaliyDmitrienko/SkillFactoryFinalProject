@@ -56,9 +56,10 @@ public class DepositorService  {
             BigDecimal newBalance = currentUser.getBalance().subtract(draw);
             currentUser.setBalance(newBalance);
             depositorRepository.save(currentUser);
+            operationService.storeOperation(currentUser.getId(), takeMoneyOperationType, draw);
             getUser(user_id);
         } else throw new InsufficientBalanceException("Operation: draw can't be execute." +
-                " User with ID=" + user_id + " current balance lesser than draw.");
+                " User with ID=" + user_id + " current balance lesser than request draw.");
     }
 
 }
