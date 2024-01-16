@@ -27,4 +27,11 @@ public class ControllerExceptionHandler {
     public AppErrorMessage insufficientBalanceException (InsufficientBalanceException ex, WebRequest request) {
         return new AppErrorMessage(0, ex.getMessage(), new Date());
     }
+    @ExceptionHandler(WrongInputMoneyDataFormatException.class)
+    @ResponseStatus(value = HttpStatus.UNSUPPORTED_MEDIA_TYPE)
+    public AppErrorMessage wrongInputMoneyDataFormatException (WrongInputMoneyDataFormatException ex, WebRequest request) {
+        return new AppErrorMessage(0, ex.getMessage(), new Date());
+    }
+
+
 }
