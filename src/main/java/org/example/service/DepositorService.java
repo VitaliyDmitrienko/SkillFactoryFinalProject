@@ -9,6 +9,7 @@ import org.example.exception.UserNotFoundException2;
 import org.example.repository.DepositorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -37,6 +38,7 @@ public class DepositorService  {
                     orElseThrow(() -> new UserNotFoundException("User with ID=" + user_id + " not found / not exist."));
     }
 
+    @Transactional
     public void putMoney (long user_id, BigDecimal income) {
             final var currentUser = depositorRepository.findById(user_id).
                     orElseThrow(() -> new UserNotFoundException2("User with ID=" + user_id + " not found / not exist."));
@@ -47,7 +49,7 @@ public class DepositorService  {
             depositorRepository.findById(user_id);
     }
 
-
+    @Transactional
     public void takeMoney (long user_id, BigDecimal draw) {
         final var currentUser = depositorRepository.findById(user_id).
                 orElseThrow(() -> new UserNotFoundException2("User with ID=" + user_id + " not found / not exist."));
