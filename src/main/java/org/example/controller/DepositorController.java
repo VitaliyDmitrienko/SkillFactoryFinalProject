@@ -38,16 +38,16 @@ public class DepositorController {
         return new ResponseEntity<>((depositorService.getBalance(depositor_id)), HttpStatus.OK);
     }
 
-    @PutMapping("/putMoney/{user_id}/{income}")
-    ResponseEntity <?> restPutMoney(@PathVariable Long user_id, @PathVariable BigDecimal income) {
-        depositorService.putMoney(user_id, income);
+    @PutMapping("/putMoney/{depositor_id}/{income}")
+    ResponseEntity <?> restPutMoney(@PathVariable Long depositor_id, @PathVariable BigDecimal income) {
+        depositorService.putMoney(depositor_id, income);
         return new ResponseEntity<> (new AppResponseMessage(1, new Date()), HttpStatus.OK);
     }
 
-    @PutMapping("/takeMoney/{depositor_id}/{draw}")
-    ResponseEntity <?> restTakeMoney(@PathVariable Long depositor_id, @PathVariable BigDecimal draw) {
+    @PutMapping("/takeMoney/{depositor_id}/{withdraw}")
+    ResponseEntity <?> restTakeMoney(@PathVariable Long depositor_id, @PathVariable BigDecimal withdraw) {
         String successfulMethodResponse = "1";
-        depositorService.takeMoney(depositor_id, draw);
+        depositorService.takeMoney(depositor_id, withdraw);
         return new ResponseEntity<> (new AppResponseMessage(1, new Date()), HttpStatus.OK);
     }
 

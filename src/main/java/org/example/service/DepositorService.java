@@ -1,7 +1,5 @@
 package org.example.service;
 
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.example.entity.Depositor;
 import org.example.exception.InsufficientBalanceException;
 import org.example.exception.UserNotFoundException;
@@ -59,7 +57,7 @@ public class DepositorService  {
     }
 
     @Transactional
-    public void takeMoney (long user_id, BigDecimal withdraw) {
+    public void takeMoney (long depositor_id, BigDecimal withdraw) {
         if (withdraw.compareTo(BigDecimal.valueOf(0)) <0) {
             methodWrongInputMoneyDataFormatException();
         }
@@ -67,17 +65,17 @@ public class DepositorService  {
          * add another version UserNotFoundException because of must return other error code response "0"
          * than standard "-1" according specifications for the project
          */
-        final var currentUser = depositorRepository.findById(user_id).
-                orElseThrow(() -> new UserNotFoundException2("User with ID=" + user_id + " not found / not exist."));
+        final var currentUser = depositorRepository.findById(depositor_id).
+                orElseThrow(() -> new UserNotFoundException2("User with ID=" + depositor_id + " not found / not exist."));
         BigDecimal currentBalance = currentUser.getBalance();
         if (currentBalance.compareTo(withdraw) >=0 ) {
             BigDecimal newBalance = currentUser.getBalance().subtract(withdraw);
             currentUser.setBalance(newBalance);
             depositorRepository.save(currentUser);
             operationService.storeOperation(currentUser.getId(), takeMoneyOperationType, withdraw);
-            getUser(user_id);
+            getUser(depositor_id);
         } else throw new InsufficientBalanceException ("Operation: withdraw can't be execute." +
-                " User with ID=" + user_id + " current balance lesser than request withdraw.");
+                " User with ID=" + depositor_id + " current balance lesser than request withdraw.");
     }
 
     void methodWrongInputMoneyDataFormatException() {
