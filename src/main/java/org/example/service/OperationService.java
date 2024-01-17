@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.List;
 
 @Service
 public class OperationService {
@@ -32,6 +33,9 @@ public class OperationService {
         newOperation.setChangeBalance(changeBalance);
         newOperation.setOperation_date(java.time.LocalDateTime.now());
         operationRepository.save(newOperation);
+    }
 
+    public List<Operation> getOperationByDepositorId (long depositor_id) {
+        return operationRepository.findByDepositorId(depositor_id);
     }
 }

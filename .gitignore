@@ -3,6 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+.gitignore
 
 ### STS ###
 .apt_generated
@@ -31,5 +32,4 @@ build/
 
 ### VS Code ###
 .vscode/
-/application.log
-/application.log.2024-01-07.0.gz
+/src/main/resources/logging/*.*
