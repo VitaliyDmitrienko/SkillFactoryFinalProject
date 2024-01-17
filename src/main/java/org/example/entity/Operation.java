@@ -26,6 +26,7 @@ public class Operation {
     @Column (name = "CHANGEBALANCE")
     private BigDecimal changeBalance;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column (name = "OPERATION_DATE")
     private LocalDateTime operation_date;
 

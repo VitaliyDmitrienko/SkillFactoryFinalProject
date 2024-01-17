@@ -28,14 +28,14 @@ public class DepositorController {
         return "Hello! It's a greeting page from your web service (test response).";
     }
 
-    @GetMapping("/getUser/{user_id}")
-    ResponseEntity<?> restGetUserById(@PathVariable Long user_id) {
-        return new ResponseEntity<>((depositorService.getUser(user_id)), HttpStatus.OK);
+    @GetMapping("/getDepositor/{depositor_id}")
+    ResponseEntity<?> restGetUserById(@PathVariable Long depositor_id) {
+        return new ResponseEntity<>((depositorService.getUser(depositor_id)), HttpStatus.OK);
     }
 
-    @GetMapping("/getBalance/{user_id}")
-    ResponseEntity<?> restGetBalanceById(@PathVariable Long user_id) {
-        return new ResponseEntity<>((depositorService.getBalance(user_id)), HttpStatus.OK);
+    @GetMapping("/getBalance/{depositor_id}")
+    ResponseEntity<?> restGetBalanceById(@PathVariable Long depositor_id) {
+        return new ResponseEntity<>((depositorService.getBalance(depositor_id)), HttpStatus.OK);
     }
 
     @PutMapping("/putMoney/{user_id}/{income}")
@@ -44,10 +44,10 @@ public class DepositorController {
         return new ResponseEntity<> (new AppResponseMessage(1, new Date()), HttpStatus.OK);
     }
 
-    @PutMapping("/takeMoney/{user_id}/{draw}")
-    ResponseEntity <?> restTakeMoney(@PathVariable Long user_id, @PathVariable BigDecimal draw) {
+    @PutMapping("/takeMoney/{depositor_id}/{draw}")
+    ResponseEntity <?> restTakeMoney(@PathVariable Long depositor_id, @PathVariable BigDecimal draw) {
         String successfulMethodResponse = "1";
-        depositorService.takeMoney(user_id, draw);
+        depositorService.takeMoney(depositor_id, draw);
         return new ResponseEntity<> (new AppResponseMessage(1, new Date()), HttpStatus.OK);
     }
 

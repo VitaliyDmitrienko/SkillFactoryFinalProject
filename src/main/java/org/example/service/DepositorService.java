@@ -29,18 +29,18 @@ public class DepositorService  {
         this.operationService = operationService;
     }
 
-    public Depositor getUser (long user_id) {
-        return depositorRepository.findById(user_id).
-                orElseThrow(() -> new UserNotFoundException("User with ID=" + user_id + " not found / not exist."));
+    public Depositor getUser (long depositor_id) {
+        return depositorRepository.findById(depositor_id).
+                orElseThrow(() -> new UserNotFoundException("User with ID=" + depositor_id + " not found / not exist."));
     }
 
-    public Depositor getBalance (long user_id) {
-            return depositorRepository.findById(user_id).
-                    orElseThrow(() -> new UserNotFoundException("User with ID=" + user_id + " not found / not exist."));
+    public Depositor getBalance (long depositor_id) {
+            return depositorRepository.findById(depositor_id).
+                    orElseThrow(() -> new UserNotFoundException("User with ID=" + depositor_id + " not found / not exist."));
     }
 
     @Transactional
-    public void putMoney (long user_id, BigDecimal income) {
+    public void putMoney (long depositor_id, BigDecimal income) {
         if (income.compareTo(BigDecimal.valueOf(0)) <0) {
             methodWrongInputMoneyDataFormatException();
         }
@@ -48,14 +48,14 @@ public class DepositorService  {
         * add another version UserNotFoundException because of must return other error code response "0"
         * than standard "-1" according specifications for the project
         */
-        final var currentUser = depositorRepository.findById(user_id).
-                    orElseThrow(() -> new UserNotFoundException2("User with ID=" + user_id + " not found / not exist."));
+        final var currentUser = depositorRepository.findById(depositor_id).
+                    orElseThrow(() -> new UserNotFoundException2("User with ID=" + depositor_id + " not found / not exist."));
         BigDecimal newBalance = currentUser.getBalance().add(income);
         currentUser.setBalance(newBalance);
         depositorRepository.save(currentUser);
 //        methodException();
         operationService.storeOperation(currentUser.getId(), putMoneyOperationType, income);
-        depositorRepository.findById(user_id);
+        depositorRepository.findById(depositor_id);
     }
 
     @Transactional
