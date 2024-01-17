@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -37,5 +38,11 @@ public class OperationService {
 
     public List<Operation> getOperationByDepositorId (long depositor_id) {
         return operationRepository.findByDepositorId(depositor_id);
+    }
+
+    public List<Operation> getOperationByDepositorIdAndBetweenDates
+            (long depositor_id, LocalDateTime begin_date, LocalDateTime finish_date) {
+        return operationRepository.findByDepositorIdAndBetweenDates
+                (depositor_id, begin_date, finish_date);
     }
 }
