@@ -1,5 +1,6 @@
 package org.example.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.entity.Depositor;
 import org.example.entity.Operation;
 import org.example.repository.OperationRepository;
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
-
+@Slf4j
 @Service
 public class OperationService {
     private final OperationRepository operationRepository;
