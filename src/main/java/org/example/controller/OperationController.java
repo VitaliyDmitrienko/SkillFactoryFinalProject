@@ -37,9 +37,13 @@ public class OperationController {
 //             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam("begin_date") LocalDateTime begin_date,
 //             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam("finish_date") LocalDateTime finish_date) {
 
-        return new ResponseEntity<>((operationService.
-                getOperationByDepositorIdAndBetweenDates(depositor_id, begin_date, finish_date)),
-                HttpStatus.OK);
+        System.out.println(depositor_id);
+        System.out.println(begin_date);
+        System.out.println(finish_date);
+//        return new ResponseEntity<>((operationService.
+//                getOperationByDepositorIdAndBetweenDates(depositor_id, begin_date, finish_date)),
+//                HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

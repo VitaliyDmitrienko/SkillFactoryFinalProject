@@ -43,7 +43,9 @@ public class OperationService {
 
     public List<Operation> getOperationByDepositorIdAndBetweenDates
             (long depositor_id, LocalDateTime begin_date, LocalDateTime finish_date) {
-        return operationRepository.findByDepositorIdAndBetweenDates
+        if (begin_date.compareTo(null) <0  || finish_date.compareTo(null)<0) {
+            return getOperationByDepositorId(depositor_id);
+        } else return operationRepository.findByDepositorIdAndBetweenDates
                 (depositor_id, begin_date, finish_date);
     }
 }
