@@ -31,7 +31,8 @@ public class OperationController {
 
     @GetMapping("/getOperationList/{depositor_id}/{begin_date}/{finish_date}")
     ResponseEntity<?> restGetOperationByDepositorIdAndBetweenDates
-    (@PathVariable Long depositor_id, @PathVariable LocalDateTime begin_date,
+    (@PathVariable Long depositor_id,
+     @PathVariable LocalDateTime begin_date,
             @PathVariable LocalDateTime finish_date) {
 //             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam("begin_date") LocalDateTime begin_date,
 //             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam("finish_date") LocalDateTime finish_date) {
@@ -39,8 +40,6 @@ public class OperationController {
         return new ResponseEntity<>((operationService.
                 getOperationByDepositorIdAndBetweenDates(depositor_id, begin_date, finish_date)),
                 HttpStatus.OK);
-
-//        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
