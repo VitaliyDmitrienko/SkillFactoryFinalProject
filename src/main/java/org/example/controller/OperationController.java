@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -25,25 +22,28 @@ public class OperationController {
 
     @GetMapping("/getOperation/{depositor_id}")
     ResponseEntity<?> restGetOperationByDepositorId(@PathVariable Long depositor_id) {
-
         return new ResponseEntity<>((operationService.getOperationByDepositorId(depositor_id)), HttpStatus.OK);
     }
 
-    @GetMapping("/getOperationList/{depositor_id}/{begin_date}/{finish_date}")
+    @GetMapping(value = {"/getOperationList/{depositor_id}/{begin_date}/{finish_date}",
+            "/getOperationList/{depositor_id}/{begin_date}",
+            "/getOperationList/{depositor_id}/{finish_date}",
+            "/getOperationList/{depositor_id}"})
     ResponseEntity<?> restGetOperationByDepositorIdAndBetweenDates
-    (@PathVariable Long depositor_id,
-     @PathVariable LocalDateTime begin_date,
-            @PathVariable LocalDateTime finish_date) {
-//             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam("begin_date") LocalDateTime begin_date,
-//             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam("finish_date") LocalDateTime finish_date) {
+        (@PathVariable (required = true) Long depositor_id,
+        @PathVariable (required = false) LocalDateTime begin_date,
+        @PathVariable (required = false) LocalDateTime finish_date) {
 
-        System.out.println(depositor_id);
-        System.out.println(begin_date);
-        System.out.println(finish_date);
-//        return new ResponseEntity<>((operationService.
-//                getOperationByDepositorIdAndBetweenDates(depositor_id, begin_date, finish_date)),
-//                HttpStatus.OK);
-        return new ResponseEntity<>(HttpStatus.OK);
+//        System.out.println(depositor_id);
+//        if (begin_date != null) System.out.println(begin_date);
+//        if (finish_date != null) System.out.println(finish_date);
+        if (begin_date != null && finish_date != null) {
+            return new ResponseEntity<>((operationService.
+                    getOperationByDepositorIdAndBetweenDates(depositor_id, begin_date, finish_date)),
+                HttpStatus.OK);}
+        else return new ResponseEntity<>((operationService.getOperationByDepositorId(depositor_id)), HttpStatus.OK);
+
+//        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-}
+    }
