@@ -21,6 +21,7 @@ public class DepositorService  {
     private final OperationService operationService;
     private final int putMoneyOperationType = 1;
     private final int takeMoneyOperationType = 2;
+    private final int transferMoneyOperationType = 3;
     @Autowired
     public DepositorService (DepositorRepository depositorRepository, OperationService operationService) {
         this.depositorRepository=depositorRepository;
@@ -38,22 +39,25 @@ public class DepositorService  {
     }
 
     @Transactional
-    public void putMoney (long depositor_id, BigDecimal income) {
-        if (income.compareTo(BigDecimal.valueOf(0)) <0) {
-            methodWrongInputMoneyDataFormatException();
-        }
+    public void putMoney (long depositor_donor_id, BigDecimal income) {
+        System.out.println("service depositor_id= "  + depositor_donor_id);
+        System.out.println("service income= "  + income);
+
+//        if (income.compareTo(BigDecimal.valueOf(0)) < 0) {
+//            methodWrongInputMoneyDataFormatException();
+//        }
         /*
         * add another version UserNotFoundException because of must return other error code response "0"
         * than standard "-1" according specifications for the project
         */
-        final var currentUser = depositorRepository.findById(depositor_id).
-                    orElseThrow(() -> new UserNotFoundException2("User with ID=" + depositor_id + " not found / not exist."));
+        final var currentUser = depositorRepository.findById(depositor_donor_id).
+                    orElseThrow(() -> new UserNotFoundException2("User with ID=" + depositor_donor_id + " not found / not exist."));
         BigDecimal newBalance = currentUser.getBalance().add(income);
         currentUser.setBalance(newBalance);
         depositorRepository.save(currentUser);
 //        methodException();
-        operationService.storeOperation(currentUser.getId(), putMoneyOperationType, income);
-        depositorRepository.findById(depositor_id);
+//        operationService.storeOperation(currentUser.getId(), currentUser.getId(), putMoneyOperationType, income);
+//        depositorRepository.findById(depositor_id);
     }
 
     @Transactional
@@ -72,7 +76,7 @@ public class DepositorService  {
             BigDecimal newBalance = currentUser.getBalance().subtract(withdraw);
             currentUser.setBalance(newBalance);
             depositorRepository.save(currentUser);
-            operationService.storeOperation(currentUser.getId(), takeMoneyOperationType, withdraw);
+            operationService.storeOperation(currentUser.getId(), currentUser.getId(), takeMoneyOperationType, withdraw);
             getUser(depositor_id);
         } else throw new InsufficientBalanceException ("Operation: withdraw can't be execute." +
                 " User with ID=" + depositor_id + " current balance lesser than request withdraw.");
