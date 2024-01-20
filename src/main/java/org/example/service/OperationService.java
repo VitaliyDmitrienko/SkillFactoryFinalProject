@@ -23,28 +23,29 @@ public class OperationService {
         this.operationRepository = operationRepository;
     }
 
-    public void storeOperation (Long depositor_id, int operation_type,
-                                BigDecimal changeBalance) {
+    public void storeOperation (Long depositor_donor_id, Long depositor_acceptor_id, int operation_type,
+                                BigDecimal change_balance) {
 //        depositor = depositorService.getUser(depositor_id);
         final var newOperation = new Operation();
 //        newOperation.setDepositor_id(depositor.getId());
-        newOperation.setDepositor_id(depositor_id);
+        newOperation.setDepositor_donor_id(depositor_donor_id);
+        newOperation.setDepositor_acceptor_id(depositor_acceptor_id);
         newOperation.setOperation_type(operation_type);
-        newOperation.setChangeBalance(changeBalance);
+        newOperation.setChange_balance(change_balance);
         newOperation.setOperation_date(java.time.LocalDateTime.now());
         operationRepository.save(newOperation);
     }
 
-    public List<Operation> getOperationByDepositorId (long depositor_id) {
-        return operationRepository.findByDepositorId(depositor_id);
+    public List<Operation> getOperationByDepositorId (long depositor_donor_id) {
+        return operationRepository.findByDepositorId(depositor_donor_id);
     }
 
     public List<Operation> getOperationByDepositorIdAndBetweenDates
-            (long depositor_id, LocalDateTime begin_date, LocalDateTime finish_date) {
+            (long depositor_donor_id, LocalDateTime begin_date, LocalDateTime finish_date) {
 //        if (begin_date.compareTo(null) <0  || finish_date.compareTo(null)<0) {
 //            return getOperationByDepositorId(depositor_id);
 //        } else
             return operationRepository.findByDepositorIdAndBetweenDates
-                (depositor_id, begin_date, finish_date);
+                (depositor_donor_id, begin_date, finish_date);
     }
 }

@@ -20,17 +20,17 @@ public class OperationController {
         this.operationService=operationService;
     }
 
-    @GetMapping("/getOperation/{depositor_id}")
-    ResponseEntity<?> restGetOperationByDepositorId(@PathVariable Long depositor_id) {
-        return new ResponseEntity<>((operationService.getOperationByDepositorId(depositor_id)), HttpStatus.OK);
+    @GetMapping("/getOperation/{depositor_donor_id}")
+    ResponseEntity<?> restGetOperationByDepositorId(@PathVariable Long depositor_donor_id) {
+        return new ResponseEntity<>((operationService.getOperationByDepositorId(depositor_donor_id)), HttpStatus.OK);
     }
 
-    @GetMapping(value = {"/getOperationList/{depositor_id}/{begin_date}/{finish_date}",
-            "/getOperationList/{depositor_id}/{begin_date}",
-            "/getOperationList/{depositor_id}/{finish_date}",
-            "/getOperationList/{depositor_id}"})
+    @GetMapping(value = {"/getOperationList/{depositor_donor_id}/{begin_date}/{finish_date}",
+            "/getOperationList/{depositor_donor_id}/{begin_date}",
+            "/getOperationList/{depositor_donor_id}/{finish_date}",
+            "/getOperationList/{depositor_donor_id}"})
     ResponseEntity<?> restGetOperationByDepositorIdAndBetweenDates
-        (@PathVariable (required = true) Long depositor_id,
+        (@PathVariable (required = true) Long depositor_donor_id,
         @PathVariable (required = false) LocalDateTime begin_date,
         @PathVariable (required = false) LocalDateTime finish_date) {
 
@@ -39,9 +39,10 @@ public class OperationController {
 //        if (finish_date != null) System.out.println(finish_date);
         if (begin_date != null && finish_date != null) {
             return new ResponseEntity<>((operationService.
-                    getOperationByDepositorIdAndBetweenDates(depositor_id, begin_date, finish_date)),
+                    getOperationByDepositorIdAndBetweenDates(depositor_donor_id, begin_date, finish_date)),
                 HttpStatus.OK);}
-        else return new ResponseEntity<>((operationService.getOperationByDepositorId(depositor_id)), HttpStatus.OK);
+        else return new ResponseEntity<>((operationService.getOperationByDepositorId(depositor_donor_id)),
+                HttpStatus.OK);
 
 //        return new ResponseEntity<>(HttpStatus.OK);
     }
