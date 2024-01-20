@@ -38,14 +38,12 @@ public class DepositorService  {
                     orElseThrow(() -> new UserNotFoundException("User with ID=" + depositor_id + " not found / not exist."));
     }
 
-    @Transactional
+//    @Transactional
     public void putMoney (long depositor_donor_id, BigDecimal income) {
-        System.out.println("service depositor_id= "  + depositor_donor_id);
-        System.out.println("service income= "  + income);
 
-//        if (income.compareTo(BigDecimal.valueOf(0)) < 0) {
-//            methodWrongInputMoneyDataFormatException();
-//        }
+        if (income.compareTo(BigDecimal.valueOf(0)) < 0) {
+            methodWrongInputMoneyDataFormatException();
+        }
         /*
         * add another version UserNotFoundException because of must return other error code response "0"
         * than standard "-1" according specifications for the project
@@ -56,30 +54,56 @@ public class DepositorService  {
         currentUser.setBalance(newBalance);
         depositorRepository.save(currentUser);
 //        methodException();
-//        operationService.storeOperation(currentUser.getId(), currentUser.getId(), putMoneyOperationType, income);
-//        depositorRepository.findById(depositor_id);
+        operationService.storeOperation(currentUser.getId(), currentUser.getId(), putMoneyOperationType, income);
+        depositorRepository.findById(depositor_donor_id);
     }
 
     @Transactional
     public void takeMoney (long depositor_id, BigDecimal withdraw) {
-        if (withdraw.compareTo(BigDecimal.valueOf(0)) <0) {
+        if (withdraw.compareTo(BigDecimal.valueOf(0)) < 0) {
             methodWrongInputMoneyDataFormatException();
         }
         /*
          * add another version UserNotFoundException because of must return other error code response "0"
          * than standard "-1" according specifications for the project
          */
-        final var currentUser = depositorRepository.findById(depositor_id).
+        final var currentDepositor = depositorRepository.findById(depositor_id).
                 orElseThrow(() -> new UserNotFoundException2("User with ID=" + depositor_id + " not found / not exist."));
-        BigDecimal currentBalance = currentUser.getBalance();
-        if (currentBalance.compareTo(withdraw) >=0 ) {
-            BigDecimal newBalance = currentUser.getBalance().subtract(withdraw);
-            currentUser.setBalance(newBalance);
-            depositorRepository.save(currentUser);
-            operationService.storeOperation(currentUser.getId(), currentUser.getId(), takeMoneyOperationType, withdraw);
+        BigDecimal currentBalance = currentDepositor.getBalance();
+        if (currentBalance.compareTo(withdraw) >= 0 ) {
+            BigDecimal newBalance = currentDepositor.getBalance().subtract(withdraw);
+            currentDepositor.setBalance(newBalance);
+            depositorRepository.save(currentDepositor);
+            operationService.storeOperation(currentDepositor.getId(), currentDepositor.getId(), takeMoneyOperationType, withdraw);
             getUser(depositor_id);
         } else throw new InsufficientBalanceException ("Operation: withdraw can't be execute." +
                 " User with ID=" + depositor_id + " current balance lesser than request withdraw.");
+    }
+    @Transactional
+    public void transferMoney (long depositor_donor_id, long depositor_acceptor_id, BigDecimal transfer_balance) {
+        if (transfer_balance.compareTo(BigDecimal.valueOf(0)) < 0) {
+            methodWrongInputMoneyDataFormatException();
+        }
+
+        /*
+         * add another version UserNotFoundException because of must return other error code response "0"
+         * than standard "-1" according specifications for the project
+         */
+        final var donorDepositor = depositorRepository.findById(depositor_donor_id).
+                orElseThrow(() -> new UserNotFoundException2("User with ID=" + depositor_donor_id + " not found / not exist."));
+        final var acceptorDepositor = depositorRepository.findById(depositor_acceptor_id).
+                orElseThrow(() -> new UserNotFoundException2("User with ID=" + depositor_acceptor_id + " not found / not exist."));
+        BigDecimal donorBalance = donorDepositor.getBalance().subtract(transfer_balance);
+        if (donorBalance.compareTo(transfer_balance) >= 0 ) {
+
+            BigDecimal acceptorBalance = acceptorDepositor.getBalance().add(transfer_balance);
+            donorDepositor.setBalance(donorBalance);
+            acceptorDepositor.setBalance(acceptorBalance);
+            depositorRepository.save(donorDepositor);
+            depositorRepository.save(acceptorDepositor);
+            operationService.storeOperation(donorDepositor.getId(), acceptorDepositor.getId(), transferMoneyOperationType, transfer_balance);
+        } else throw new InsufficientBalanceException ("Operation: transfer money can't be execute." +
+                " User with ID=" + depositor_donor_id + " current balance lesser than request transfer.");
     }
 
     void methodWrongInputMoneyDataFormatException() {

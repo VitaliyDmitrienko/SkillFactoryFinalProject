@@ -17,9 +17,12 @@ import java.util.Date;
 public class DepositorController {
 
     private final DepositorService depositorService;
+    int successfulMethodResponse = 1;
+    int failedMethodResponse = 0;
+
 
     @Autowired
-    public DepositorController (DepositorService depositorService) {
+    public DepositorController(DepositorService depositorService) {
         this.depositorService = depositorService;
     }
 
@@ -39,23 +42,23 @@ public class DepositorController {
     }
 
     @PutMapping("/putMoney/{depositor_donor_id}/{income}")
-    ResponseEntity <?> restPutMoney(@PathVariable Long depositor_donor_id, @PathVariable BigDecimal income) {
-        System.out.println("rest depositor_id= "  + depositor_donor_id);
-        System.out.println("rest income= "  + income);
-
-        log.info(String.valueOf(depositor_donor_id));
-        log.info(String.valueOf(income));
-
+    ResponseEntity<?> restPutMoney(@PathVariable Long depositor_donor_id, @PathVariable BigDecimal income) {
         depositorService.putMoney(depositor_donor_id, income);
-        return new ResponseEntity<> (new AppResponseMessage(1, new Date()), HttpStatus.OK);
+        return new ResponseEntity<>(new AppResponseMessage(successfulMethodResponse, new Date()), HttpStatus.OK);
     }
 
     @PutMapping("/takeMoney/{depositor_id}/{withdraw}")
-    ResponseEntity <?> restTakeMoney(@PathVariable Long depositor_id, @PathVariable BigDecimal withdraw) {
-        String successfulMethodResponse = "1";
+    ResponseEntity<?> restTakeMoney(@PathVariable Long depositor_id, @PathVariable BigDecimal withdraw) {
         depositorService.takeMoney(depositor_id, withdraw);
-        return new ResponseEntity<> (new AppResponseMessage(1, new Date()), HttpStatus.OK);
+        return new ResponseEntity<>(new AppResponseMessage(successfulMethodResponse, new Date()), HttpStatus.OK);
     }
 
+    @PutMapping("transferMoney/{depositor_donor_id}/{depositor_acceptor_id}/{transfer_balance}")
+    ResponseEntity<?> restTransferMoney(@PathVariable Long depositor_donor_id, @PathVariable Long depositor_acceptor_id,
+                                       @PathVariable BigDecimal transfer_balance) {
+        depositorService.transferMoney(depositor_donor_id, depositor_acceptor_id, transfer_balance);
+        return new ResponseEntity<>(new AppResponseMessage(successfulMethodResponse, new Date()), HttpStatus.OK);
+    }
 
 }
+
