@@ -84,7 +84,6 @@ public class DepositorService  {
         if (transfer_balance.compareTo(BigDecimal.valueOf(0)) < 0) {
             methodWrongInputMoneyDataFormatException();
         }
-
         /*
          * add another version UserNotFoundException because of must return other error code response "0"
          * than standard "-1" according specifications for the project
