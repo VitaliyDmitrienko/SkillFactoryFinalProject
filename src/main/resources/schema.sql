@@ -1,16 +1,16 @@
 CREATE SCHEMA IF NOT EXISTS PUBLIC;
 
-CREATE TABLE IF NOT EXISTS PUBLIC.DEPOSITOR (
-  id SERIAL PRIMARY KEY,
-  balance money
-  );
+--CREATE TABLE PUBLIC.DEPOSITOR (
+--CREATE TABLE DEPOSITOR (ID IDENTITY PRIMARY KEY, NUMERIC money)
+CREATE TABLE IF NOT EXISTS PUBLIC.DEPOSITOR (ID INT AUTO_INCREMENT PRIMARY KEY, BALANCE NUMERIC);
 
---create table public.operation (
---	id serial primary key,
---	depositor_donor_id integer not null,
---	depositor_acceptor_id integer not null,
---	operation_type integer not null,
---	change_balance money,
---	operation_date timestamp,
+create table public.operation (
+	id INT AUTO_INCREMENT primary key,
+	depositor_donor_id INT not null,
+	depositor_acceptor_id INT not null,
+	operation_type INT not null,
+	change_balance NUMERIC,
+	operation_date timestamp
 --	FOREIGN KEY (depositor_donor_id) REFERENCES depositor (id) ON DELETE CASCADE,
---	FOREIGN KEY (depositor_acceptor_id) REFERENCES depositor (id) ON DELETE CASCADE);
+--	FOREIGN KEY (depositor_acceptor_id) REFERENCES depositor (id) ON DELETE CASCADE
+    );
