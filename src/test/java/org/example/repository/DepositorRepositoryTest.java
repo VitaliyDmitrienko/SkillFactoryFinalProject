@@ -19,6 +19,7 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TE
 class DepositorRepositoryTest {
     @Autowired
     private DepositorRepository depositorRepository;
+
     @Test
     void getData_whenGetAll_countIsAll () {
         List<Depositor> depositors = depositorRepository.findAll();
