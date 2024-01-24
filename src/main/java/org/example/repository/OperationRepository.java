@@ -13,10 +13,10 @@ import java.util.List;
 public interface OperationRepository extends JpaRepository <Operation, Long> {
 
     @Transactional(readOnly = true)
-    @Query("select op from Operation op where op.depositor_donor_id=:depositor_donor_id " +
-            "and op.operation_date between :begin_date and :finish_date")
-    List<Operation> findByDepositorIdAndBetweenDates
-            (long depositor_donor_id, LocalDateTime begin_date, LocalDateTime finish_date);
+    @Query("select op from Operation op where op.depositorDonorId=:depositorDonorId " +
+            "and op.operationDate between :beginDate and :finishDate")
+    List<Operation> findByDepositorDonorIdAndBetweenDates
+            (long depositorDonorId, LocalDateTime beginDate, LocalDateTime finishDate);
 
     @Transactional(readOnly = true)
 //    @Query(nativeQuery = true,

@@ -29,16 +29,16 @@ class OperationRepositoryTest {
     }
 
     @Test
-    void getOperationNullId () {
+    void getOperationListZeroDepositorId () {
         List<Operation> operationNull = operationRepository.findByDepositorDonorId(0L);
-        Assertions.assertNull(operationNull);
+        Assertions.assertTrue(operationNull.isEmpty());
     }
 
     @Test
-    void getDepositorOverExistId () {
+    void getOperationListOverExistDepositorId () {
         List<Operation> operations = operationRepository.findAll();
         List<Operation> operationOver = operationRepository.findByDepositorDonorId(operations.size()+1L);
-        Assertions.assertNull(operationOver);
+        Assertions.assertTrue(operationOver.isEmpty());
     }
 
 

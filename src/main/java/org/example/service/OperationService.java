@@ -45,7 +45,7 @@ public class OperationService {
 //        if (beginDate.compareTo(null) <0  || finish_date.compareTo(null)<0) {
 //            return getOperationByDepositorId(depositor_id);
 //        } else
-            return operationRepository.findByDepositorIdAndBetweenDates
+            return operationRepository.findByDepositorDonorIdAndBetweenDates
                 (depositorDonorId, beginDate, finishDate);
     }
 }
