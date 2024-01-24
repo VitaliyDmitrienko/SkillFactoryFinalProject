@@ -37,7 +37,7 @@ public class OperationService {
     }
 
     public List<Operation> getOperationByDepositorId (long depositor_donor_id) {
-        return operationRepository.findById(depositor_donor_id);
+        return operationRepository.findByDepositorDonorId(depositor_donor_id);
     }
 
     public List<Operation> getOperationByDepositorIdAndBetweenDates
