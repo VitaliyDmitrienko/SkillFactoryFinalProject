@@ -23,29 +23,29 @@ public class OperationService {
         this.operationRepository = operationRepository;
     }
 
-    public void storeOperation (Long depositor_donor_id, Long depositor_acceptor_id, int operation_type,
-                                BigDecimal change_balance) {
+    public void storeOperation (Long depositorDonorId, Long depositorAcceptorId, int operationType,
+                                BigDecimal changeBalance) {
 //        depositor = depositorService.getUser(depositor_id);
         final var newOperation = new Operation();
 //        newOperation.setDepositor_id(depositor.getId());
-        newOperation.setDepositor_donor_id(depositor_donor_id);
-        newOperation.setDepositor_acceptor_id(depositor_acceptor_id);
-        newOperation.setOperation_type(operation_type);
-        newOperation.setChange_balance(change_balance);
-        newOperation.setOperation_date(java.time.LocalDateTime.now());
+        newOperation.setDepositorDonorId(depositorDonorId);
+        newOperation.setDepositorAcceptorId(depositorAcceptorId);
+        newOperation.setOperationType(operationType);
+        newOperation.setChangeBalance(changeBalance);
+        newOperation.setOperationDate(java.time.LocalDateTime.now());
         operationRepository.save(newOperation);
     }
 
-    public List<Operation> getOperationByDepositorId (long depositor_donor_id) {
-        return operationRepository.findByDepositorDonorId(depositor_donor_id);
+    public List<Operation> getOperationByDepositorId (long depositorDonorId) {
+        return operationRepository.findByDepositorDonorId(depositorDonorId);
     }
 
     public List<Operation> getOperationByDepositorIdAndBetweenDates
-            (long depositor_donor_id, LocalDateTime begin_date, LocalDateTime finish_date) {
-//        if (begin_date.compareTo(null) <0  || finish_date.compareTo(null)<0) {
+            (long depositorDonorId, LocalDateTime beginDate, LocalDateTime finishDate) {
+//        if (beginDate.compareTo(null) <0  || finish_date.compareTo(null)<0) {
 //            return getOperationByDepositorId(depositor_id);
 //        } else
             return operationRepository.findByDepositorIdAndBetweenDates
-                (depositor_donor_id, begin_date, finish_date);
+                (depositorDonorId, beginDate, finishDate);
     }
 }

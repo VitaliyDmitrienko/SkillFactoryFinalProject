@@ -20,28 +20,28 @@ public class OperationController {
         this.operationService=operationService;
     }
 
-    @GetMapping("/getOperation/{depositor_donor_id}")
-    ResponseEntity<?> restGetOperationByDepositorId(@PathVariable Long depositor_donor_id) {
-        return new ResponseEntity<>((operationService.getOperationByDepositorId(depositor_donor_id)), HttpStatus.OK);
+    @GetMapping("/getOperation/{depositorDonorId}")
+    ResponseEntity<?> restGetOperationByDepositorId(@PathVariable Long depositorDonorId) {
+        return new ResponseEntity<>((operationService.getOperationByDepositorId(depositorDonorId)), HttpStatus.OK);
     }
 
-    @GetMapping(value = {"/getOperationList/{depositor_donor_id}/{begin_date}/{finish_date}",
-            "/getOperationList/{depositor_donor_id}/{begin_date}",
-            "/getOperationList/{depositor_donor_id}/{finish_date}",
-            "/getOperationList/{depositor_donor_id}"})
+    @GetMapping(value = {"/getOperationList/{depositorDonorId}/{beginDate}/{finishDate}",
+            "/getOperationList/{depositorDonorId}/{beginDate}",
+            "/getOperationList/{depositorDonorId}/{finishDate}",
+            "/getOperationList/{depositorDonorId}"})
     ResponseEntity<?> restGetOperationByDepositorIdAndBetweenDates
-        (@PathVariable (required = true) Long depositor_donor_id,
-        @PathVariable (required = false) LocalDateTime begin_date,
-        @PathVariable (required = false) LocalDateTime finish_date) {
+        (@PathVariable (required = true) Long depositorDonorId,
+        @PathVariable (required = false) LocalDateTime beginDate,
+        @PathVariable (required = false) LocalDateTime finishDate) {
 
 //        System.out.println(depositor_id);
 //        if (begin_date != null) System.out.println(begin_date);
 //        if (finish_date != null) System.out.println(finish_date);
-        if (begin_date != null && finish_date != null) {
+        if (beginDate != null && finishDate != null) {
             return new ResponseEntity<>((operationService.
-                    getOperationByDepositorIdAndBetweenDates(depositor_donor_id, begin_date, finish_date)),
+                    getOperationByDepositorIdAndBetweenDates(depositorDonorId, beginDate, finishDate)),
                 HttpStatus.OK);}
-        else return new ResponseEntity<>((operationService.getOperationByDepositorId(depositor_donor_id)),
+        else return new ResponseEntity<>((operationService.getOperationByDepositorId(depositorDonorId)),
                 HttpStatus.OK);
 
 //        return new ResponseEntity<>(HttpStatus.OK);

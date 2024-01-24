@@ -17,20 +17,20 @@ public class Operation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name = "DEPOSITOR_DONOR_ID")
-    private Long depositor_donor_id;
+    @Column (name = "DEPOSITORDONORID")
+    private Long depositorDonorId;
 
-    @Column (name = "DEPOSITOR_ACCEPTOR_ID")
-    private Long depositor_acceptor_id;
+    @Column (name = "DEPOSITORACCEPTORID")
+    private Long depositorAcceptorId;
 
-    @Column (name = "OPERATION_TYPE")
-    private int operation_type;
+    @Column (name = "OPERATIONTYPE")
+    private int operationType;
 
-    @Column (name = "CHANGE_BALANCE")
-    private BigDecimal change_balance;
+    @Column (name = "CHANGEBALANCE")
+    private BigDecimal changeBalance;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column (name = "OPERATION_DATE")
-    private LocalDateTime operation_date;
+    @Column (name = "OPERATIONDATE")
+    private LocalDateTime operationDate;
 
 }

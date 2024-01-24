@@ -24,7 +24,7 @@ public interface OperationRepository extends JpaRepository <Operation, Long> {
 //    @Query("select op from Operation op where op.depositor_donor_id=:depositor_donor_id")
 //    List<Operation> findByDepositorId (@Param(depositor_id) long depositor_id);
 //        List<Operation> findByDepositorId (long depositor_donor_id);
-        List<Operation> findByDepositorDonorId (long depositor_donor_id);
+        List<Operation> findByDepositorDonorId (long depositorDonorId);
 
     @Transactional(readOnly = true) Operation findById (long id);
 
