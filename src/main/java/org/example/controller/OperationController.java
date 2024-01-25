@@ -29,7 +29,7 @@ public class OperationController {
             "/getOperationList/{depositorDonorId}/{beginDate}",
             "/getOperationList/{depositorDonorId}/{finishDate}",
             "/getOperationList/{depositorDonorId}"})
-    ResponseEntity<?> restGetOperationByDepositorIdAndBetweenDates
+    ResponseEntity<?> restGetOperationByDepositorIdAndOperationDateBetween
         (@PathVariable (required = true) Long depositorDonorId,
         @PathVariable (required = false) LocalDateTime beginDate,
         @PathVariable (required = false) LocalDateTime finishDate) {
@@ -39,7 +39,7 @@ public class OperationController {
 //        if (finish_date != null) System.out.println(finish_date);
         if (beginDate != null && finishDate != null) {
             return new ResponseEntity<>((operationService.
-                    getOperationByDepositorIdAndBetweenDates(depositorDonorId, beginDate, finishDate)),
+                    getOperationByDepositorIdAndOperationDateBetween(depositorDonorId, beginDate, finishDate)),
                 HttpStatus.OK);}
         else return new ResponseEntity<>((operationService.getOperationByDepositorId(depositorDonorId)),
                 HttpStatus.OK);

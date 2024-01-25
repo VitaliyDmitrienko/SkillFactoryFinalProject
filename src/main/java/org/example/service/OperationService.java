@@ -40,12 +40,12 @@ public class OperationService {
         return operationRepository.findByDepositorDonorId(depositorDonorId);
     }
 
-    public List<Operation> getOperationByDepositorIdAndBetweenDates
+    public List<Operation> getOperationByDepositorIdAndOperationDateBetween
             (long depositorDonorId, LocalDateTime beginDate, LocalDateTime finishDate) {
 //        if (beginDate.compareTo(null) <0  || finish_date.compareTo(null)<0) {
 //            return getOperationByDepositorId(depositor_id);
 //        } else
-            return operationRepository.findByDepositorDonorIdAndBetweenDates
+            return operationRepository.findByDepositorDonorIdAndOperationDateBetween
                 (depositorDonorId, beginDate, finishDate);
     }
 }
