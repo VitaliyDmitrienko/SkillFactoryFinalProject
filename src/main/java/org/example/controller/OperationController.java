@@ -25,26 +25,22 @@ public class OperationController {
         return new ResponseEntity<>((operationService.getOperationByDepositorId(depositorDonorId)), HttpStatus.OK);
     }
 
-    @GetMapping(value = {"/getOperationList/{depositorDonorId}/{beginDate}/{finishDate}",
-            "/getOperationList/{depositorDonorId}/{beginDate}",
-            "/getOperationList/{depositorDonorId}/{finishDate}",
-            "/getOperationList/{depositorDonorId}"})
+//    @GetMapping(value = {"/getOperationList/{depositorDonorId}/{beginDate}/{finishDate}",
+//            "/getOperationList/{depositorDonorId}/{beginDate}",
+//            "/getOperationList/{depositorDonorId}/{finishDate}",
+//            "/getOperationList/{depositorDonorId}"})
+//    @GetMapping ("/getOperationList/{depositorDonorId}")
+    @GetMapping ("/getOperationList")
     ResponseEntity<?> restGetOperationByDepositorIdAndOperationDateBetween
-        (@PathVariable (required = true) Long depositorDonorId,
-        @PathVariable (required = false) LocalDateTime beginDate,
-        @PathVariable (required = false) LocalDateTime finishDate) {
-
-//        System.out.println(depositor_id);
-//        if (begin_date != null) System.out.println(begin_date);
-//        if (finish_date != null) System.out.println(finish_date);
+        (@RequestParam (required = true) Long depositorDonorId,
+        @RequestParam (required = false) LocalDateTime beginDate,
+        @RequestParam (required = false) LocalDateTime finishDate) {
         if (beginDate != null && finishDate != null) {
             return new ResponseEntity<>((operationService.
                     getOperationByDepositorIdAndOperationDateBetween(depositorDonorId, beginDate, finishDate)),
                 HttpStatus.OK);}
         else return new ResponseEntity<>((operationService.getOperationByDepositorId(depositorDonorId)),
                 HttpStatus.OK);
-
-//        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    }
+}
