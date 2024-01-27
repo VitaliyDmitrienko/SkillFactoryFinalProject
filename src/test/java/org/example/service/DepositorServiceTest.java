@@ -26,8 +26,8 @@ class DepositorServiceTest {
 
     @InjectMocks
     private DepositorService depositorService;
-    @Mock
-    private Depositor depositor;
+//    @Mock
+//    private Depositor depositor;
 //    private Depositor depositor2;
 //    private Depositor depositor3;
 
@@ -40,15 +40,17 @@ class DepositorServiceTest {
 
     @Test
     void getDepositor() {
-        Depositor depositor1 = new Depositor(1L, 5000);
+//        Depositor depositor1 = new Depositor(1L, 5000);
+        Depositor depositor1 = Depositor.builder().id(1L).balance(BigDecimal.valueOf(5000.00)).build();
+
         Depositor depositor2 = new Depositor(2L, 10000);
 //        Depositor depositor2 = Depositor.builder().id(1L).balance(BigDecimal.valueOf(5000.00)).build();
         Mockito.when(depositorRepository.findById(1L)).thenReturn(Optional.of(depositor1));
 
         Optional<Depositor> depositorTest = depositorRepository.findById(1L);
         System.out.println(depositorTest);
-        Long depositorId = depositorTest.get().getId();
-        Assertions.assertEquals(1L,depositorId);
+//        Long depositorId = depositorRepository.findById(1L).get().getId();
+        Assertions.assertEquals(1L, depositorTest.get().getId());
 
     }
 

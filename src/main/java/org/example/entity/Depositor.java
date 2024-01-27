@@ -5,15 +5,25 @@ import lombok.*;
 
 import java.math.BigDecimal;
 
-@Data
 @Entity
+//@Data
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
 @NoArgsConstructor
-//@Builder
+//@RequiredArgsConstructor
+@Builder
 @AllArgsConstructor
+//@AllArgsConstructor(access=AccessLevel.PRIVATE)
 @Table(name = "DEPOSITOR")
 public class Depositor {
+
+//    private Depositor() {};
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @OneToMany
+    @ManyToOne
     private Long id;
 
     @Column(name = "BALANCE")

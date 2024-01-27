@@ -18,6 +18,8 @@ public class Operation {
     private Long id;
 
     @Column (name = "DEPOSITORDONORID")
+//    @OneToMany
+//    @JoinColumn(name = "id")
     private Long depositorDonorId;
 
     @Column (name = "DEPOSITORACCEPTORID")
