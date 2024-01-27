@@ -49,7 +49,9 @@ Released one (REST) method:
         {"id":7,"depositorDonorId":1,"depositorAcceptorId":1,"operationType":1,"changeBalance":500.00,"operationDate":"2024-01-16T22:38:39.513291"},]
    - in wrong case (if Depositor not found/not exist) return empty JSON: [],
    if one or both optional parameters is empty return all operation list like above method "getOperation".
-
+Edit data-base structure due actual project status.
+![img_3.png](src/main/resources/image/img_3.png)
+   - 
 27-jan-2024.
 Stage #4 (Optional).
    Add tests:
