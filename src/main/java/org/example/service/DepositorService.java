@@ -28,7 +28,7 @@ public class DepositorService  {
         this.operationService = operationService;
     }
 
-    public Depositor getUser (long depositor_id) {
+    public Depositor getDepositor (long depositor_id) {
         return depositorRepository.findById(depositor_id).
                 orElseThrow(() -> new UserNotFoundException("User with ID=" + depositor_id + " not found / not exist."));
     }
@@ -75,7 +75,7 @@ public class DepositorService  {
             currentDepositor.setBalance(newBalance);
             depositorRepository.save(currentDepositor);
             operationService.storeOperation(currentDepositor.getId(), currentDepositor.getId(), takeMoneyOperationType, withdraw);
-            getUser(depositor_id);
+            getDepositor(depositor_id);
         } else throw new InsufficientBalanceException ("Operation: withdraw can't be execute." +
                 " User with ID=" + depositor_id + " current balance lesser than request withdraw.");
     }

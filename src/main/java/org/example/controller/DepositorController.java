@@ -33,7 +33,7 @@ public class DepositorController {
 
     @GetMapping("/getDepositor/{depositor_donor_id}")
     ResponseEntity<?> restGetUserById(@PathVariable Long depositor_donor_id) {
-        return new ResponseEntity<>((depositorService.getUser(depositor_donor_id)), HttpStatus.OK);
+        return new ResponseEntity<>((depositorService.getDepositor(depositor_donor_id)), HttpStatus.OK);
     }
 
     @GetMapping("/getBalance/{depositor_id}")

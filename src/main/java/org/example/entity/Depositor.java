@@ -1,6 +1,7 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,7 +9,8 @@ import java.math.BigDecimal;
 
 @Data
 @Entity
-@NoArgsConstructor
+//@NoArgsConstructor
+@Builder
 //@RequiredArgsConstructor
 @Table(name = "DEPOSITOR")
 public class Depositor {
