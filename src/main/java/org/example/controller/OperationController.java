@@ -20,10 +20,10 @@ public class OperationController {
         this.operationService=operationService;
     }
 
-//    @GetMapping("/getOperation/{depositorDonorId}")
-//    ResponseEntity<?> restGetOperationByDepositorId(@PathVariable Long depositorDonorId) {
-//        return new ResponseEntity<>((operationService.getOperationByDepositorId(depositorDonorId)), HttpStatus.OK);
-//    }
+    @GetMapping("/getOperation/{depositorDonorId}")
+    ResponseEntity<?> restGetOperationByDepositorId(@PathVariable Long depositorDonorId) {
+        return new ResponseEntity<>((operationService.getOperationByDepositorId(depositorDonorId)), HttpStatus.OK);
+    }
 
 //    @GetMapping(value = {"/getOperationList/{depositorDonorId}/{beginDate}/{finishDate}",
 //            "/getOperationList/{depositorDonorId}/{beginDate}",

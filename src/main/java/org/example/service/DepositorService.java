@@ -28,9 +28,9 @@ public class DepositorService  {
         this.operationService = operationService;
     }
 
-    public Depositor getDepositor (long depositor_id) {
-        return depositorRepository.findById(depositor_id).
-                orElseThrow(() -> new UserNotFoundException("User with ID=" + depositor_id + " not found / not exist."));
+    public Depositor getDepositor (long id) {
+        return depositorRepository.findById(id).
+                orElseThrow(() -> new UserNotFoundException("User with ID=" + id + " not found / not exist."));
     }
 
     public Depositor getBalance (long depositor_id) {

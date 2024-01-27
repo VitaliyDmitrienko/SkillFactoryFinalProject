@@ -1,17 +1,15 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Data
 @Entity
-//@NoArgsConstructor
-@Builder
-//@RequiredArgsConstructor
+@NoArgsConstructor
+//@Builder
+@AllArgsConstructor
 @Table(name = "DEPOSITOR")
 public class Depositor {
     @Id
@@ -20,4 +18,7 @@ public class Depositor {
 
     @Column(name = "BALANCE")
     private BigDecimal balance;
+
+    public Depositor(long l, int i) {
+    }
 }
