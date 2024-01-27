@@ -17,9 +17,10 @@ public class Operation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name = "DEPOSITORDONORID")
+//    @Column (name = "DEPOSITORDONORID")
 //    @OneToMany
-//    @JoinColumn(name = "id")
+    @ManyToOne
+    @JoinColumn(name = "DepositorId")
     private Long depositorDonorId;
 
     @Column (name = "DEPOSITORACCEPTORID")
