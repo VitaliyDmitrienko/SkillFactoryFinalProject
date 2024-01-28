@@ -23,12 +23,11 @@ public class Depositor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @OneToMany
-    @ManyToOne
+//    @Column(name = "DepositorId")
+//    @ManyToOne
     private Long id;
 
     @Column(name = "BALANCE")
     private BigDecimal balance;
 
-    public Depositor(long l, int i) {
-    }
 }

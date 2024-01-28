@@ -35,13 +35,13 @@ public class OperationController {
         (@PathVariable Long depositorDonorId,
         @RequestParam (required = false) LocalDateTime beginDate,
         @RequestParam (required = false) LocalDateTime finishDate) {
-        if (beginDate != null && finishDate != null) {
+//        if (beginDate != null && finishDate != null) {
             return new ResponseEntity<>((operationService.
                     getOperationByDepositorIdAndOperationDateBetween(depositorDonorId, beginDate, finishDate)),
                 HttpStatus.OK);
-    }
-        else return new ResponseEntity<>((operationService.getOperationByDepositorId(depositorDonorId)),
-                HttpStatus.OK);
+//    }
+//        else return new ResponseEntity<>((operationService.getOperationByDepositorId(depositorDonorId)),
+//                HttpStatus.OK);
     }
 
 }

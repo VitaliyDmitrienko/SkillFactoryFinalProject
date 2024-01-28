@@ -10,9 +10,9 @@ public class Application {
 
 		SpringApplication.run(Application.class, args);
 
-		System.out.println("In case of run Application local can see execute: http://localhost:8080/");
-		System.out.println("URI request example can access by http://localhost:8080/swagger-ui/index.html#");
-		System.out.println("Docs access by http://localhost:8080/v3/api-docs");
+		System.out.println("In case of Application run local, can see execute: http://localhost:8080/greeting");
+		System.out.println("URI request syntax can access by: http://localhost:8080/swagger-ui/index.html#");
+		System.out.println("API Docs can access by: http://localhost:8080/v3/api-docs");
 	}
 
 }

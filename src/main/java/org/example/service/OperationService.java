@@ -8,14 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 @Slf4j
 @Service
 public class OperationService {
     private final OperationRepository operationRepository;
-//    private DepositorService depositorService;
     private Depositor depositor;
 
     @Autowired
@@ -25,9 +23,7 @@ public class OperationService {
 
     public void storeOperation (Long depositorDonorId, Long depositorAcceptorId, int operationType,
                                 BigDecimal changeBalance) {
-//        depositor = depositorService.getUser(depositor_id);
         final var newOperation = new Operation();
-//        newOperation.setDepositor_id(depositor.getId());
         newOperation.setDepositorDonorId(depositorDonorId);
         newOperation.setDepositorAcceptorId(depositorAcceptorId);
         newOperation.setOperationType(operationType);
@@ -42,10 +38,10 @@ public class OperationService {
 
     public List<Operation> getOperationByDepositorIdAndOperationDateBetween
             (long depositorDonorId, LocalDateTime beginDate, LocalDateTime finishDate) {
-//        if (beginDate.compareTo(null) <0  || finish_date.compareTo(null)<0) {
-//            return getOperationByDepositorId(depositor_id);
-//        } else
+        if (beginDate != null && finishDate != null) {
             return operationRepository.findByDepositorDonorIdAndOperationDateBetween
-                (depositorDonorId, beginDate, finishDate);
+                    (depositorDonorId, beginDate, finishDate);
+        } else return getOperationByDepositorId(depositorDonorId);
+
     }
 }
