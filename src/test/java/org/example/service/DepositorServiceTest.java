@@ -43,7 +43,7 @@ class DepositorServiceTest {
 //        Depositor depositor1 = new Depositor(1L, 5000);
         Depositor depositor1 = Depositor.builder().id(1L).balance(BigDecimal.valueOf(5000.00)).build();
 
-        Depositor depositor2 = new Depositor(2L, 10000);
+//        Depositor depositor2 = new Depositor(2L, 10000);
 //        Depositor depositor2 = Depositor.builder().id(1L).balance(BigDecimal.valueOf(5000.00)).build();
         Mockito.when(depositorRepository.findById(1L)).thenReturn(Optional.of(depositor1));
 

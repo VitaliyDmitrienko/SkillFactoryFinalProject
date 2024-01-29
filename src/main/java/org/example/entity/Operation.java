@@ -17,14 +17,20 @@ public class Operation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name = "DEPOSITORDONORID")
+//    @Column (name = "DEPOSITORDONORID")
 //    @OneToMany
-//    @ManyToOne
-//    @JoinColumn(name = "DepositorId")
-    private Long depositorDonorId;
+    @ManyToOne
+    @JoinColumn(name = "depositor_id", nullable = false)
+//    private Long depositorDonorId;
+    private Depositor depositorDonorId;
 
     @Column (name = "DEPOSITORACCEPTORID")
     private Long depositorAcceptorId;
+//    @Column(insertable=false, updatable=false)
+//    @ManyToOne
+//    @JoinColumn(name = "depositor_id", nullable = false, insertable=false, updatable=false)
+//    @JoinColumn(name = "depositor_id", nullable = false)
+//    private Depositor depositorAcceptorId;
 
     @Column (name = "OPERATIONTYPE")
     private int operationType;
