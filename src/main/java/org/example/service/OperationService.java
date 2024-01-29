@@ -21,12 +21,12 @@ public class OperationService {
         this.operationRepository = operationRepository;
     }
 
-    public void storeOperation (Depositor depositorDonorId, Long depositorAcceptorId, int operationType,
+    public void storeOperation (Long depositorDonorId, Long depositorAcceptorId, int operationType,
                                 BigDecimal changeBalance) {
         final var newOperation = new Operation();
-//        newOperation.setDepositorDonorId(depositorDonorId);
         newOperation.setDepositorDonorId(depositorDonorId);
-//        newOperation.setDepositorAcceptorId(depositorAcceptorId);
+        newOperation.setDepositorDonorId(depositorDonorId);
+        newOperation.setDepositorAcceptorId(depositorAcceptorId);
         newOperation.setDepositorAcceptorId(depositorAcceptorId);
         newOperation.setOperationType(operationType);
         newOperation.setChangeBalance(changeBalance);

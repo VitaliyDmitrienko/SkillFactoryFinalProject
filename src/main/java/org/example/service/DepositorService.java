@@ -54,7 +54,7 @@ public class DepositorService  {
         currentUser.setBalance(newBalance);
         depositorRepository.save(currentUser);
 //        methodException();
-        operationService.storeOperation(currentUser, currentUser.getId(), putMoneyOperationType, income);
+        operationService.storeOperation(currentUser.getId(), currentUser.getId(), putMoneyOperationType, income);
         depositorRepository.findById(depositor_donor_id);
     }
 
@@ -74,7 +74,7 @@ public class DepositorService  {
             BigDecimal newBalance = currentDepositor.getBalance().subtract(withdraw);
             currentDepositor.setBalance(newBalance);
             depositorRepository.save(currentDepositor);
-            operationService.storeOperation(currentDepositor, currentDepositor.getId(), takeMoneyOperationType, withdraw);
+            operationService.storeOperation(currentDepositor.getId(), currentDepositor.getId(), takeMoneyOperationType, withdraw);
             getDepositor(depositor_id);
         } else throw new InsufficientBalanceException ("Operation: withdraw can't be execute." +
                 " User with ID=" + depositor_id + " current balance lesser than request withdraw.");
@@ -100,7 +100,7 @@ public class DepositorService  {
             acceptorDepositor.setBalance(acceptorBalance);
             depositorRepository.save(donorDepositor);
             depositorRepository.save(acceptorDepositor);
-            operationService.storeOperation(donorDepositor, acceptorDepositor.getId(), transferMoneyOperationType, transfer_balance);
+            operationService.storeOperation(donorDepositor.getId(), acceptorDepositor.getId(), transferMoneyOperationType, transfer_balance);
         } else throw new InsufficientBalanceException ("Operation: transfer money can't be execute." +
                 " User with ID=" + depositor_donor_id + " current balance lesser than request transfer.");
     }
