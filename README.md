@@ -56,6 +56,7 @@ Edit data-base structure due actual project status.
 Stage #4 (Optional).
    Add tests:
    1. @SpringBootTest Application contextLoad().
-   2. DepositorRepositoryTest and OperationRepositoryTest by using test scope in-mem H2 data-base
+   2. DepositorRepositoryTest and OperationRepositoryTest by using test scope in-mem H2 data-base.
       (add test properties in ./src/test/resources/application.properties).
    3. Add test DB-data in ./src/import.sql.
+   4. Some DB-dump/backups placed in ./src/main/resources/db_dump/*.*. 
