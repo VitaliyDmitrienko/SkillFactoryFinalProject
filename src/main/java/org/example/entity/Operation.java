@@ -1,16 +1,19 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDateTime;
 
-@Data
+//@Data
 @Entity
+@Getter
+@Setter
+@EqualsAndHashCode
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "OPERATION")
 public class Operation {
     @Id
