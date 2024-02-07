@@ -38,7 +38,7 @@ public class DepositorService  {
                     orElseThrow(() -> new UserNotFoundException("User with ID=" + depositor_id + " not found / not exist."));
     }
 
-//    @Transactional
+    @Transactional
     public void putMoney (long depositor_donor_id, BigDecimal income) {
 
         if (income.compareTo(BigDecimal.valueOf(0)) < 0) {
