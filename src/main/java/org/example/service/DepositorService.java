@@ -1,13 +1,13 @@
 package org.example.service;
 
 import org.example.dto.DepositorDTO;
-import org.example.entity.Depositor;
-import org.example.exception.InsufficientBalanceException;
-import org.example.exception.UserNotFoundException;
-import org.example.exception.UserNotFoundException2;
-import org.example.exception.WrongInputMoneyDataFormatException;
+import org.example.entity.*;
+import org.example.exception.*;
+//import org.example.exception.UserNotFoundException;
+//import org.example.exception.UserNotFoundException2;
+//import org.example.exception.WrongInputMoneyDataFormatException;
 import org.example.mapper.DepositorMapper;
-import org.example.repository.DepositorRepository;
+import org.example.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +18,9 @@ import java.math.BigDecimal;
 //@NoArgsConstructor(force = true)
 //@RequiredArgsConstructor
 public class DepositorService  {
-
-    private final DepositorRepository depositorRepository;
+    @Autowired
+    private DepositorRepository depositorRepository;
+    @Autowired
     private final OperationService operationService;
     private final int putMoneyOperationType = 1;
     private final int takeMoneyOperationType = 2;

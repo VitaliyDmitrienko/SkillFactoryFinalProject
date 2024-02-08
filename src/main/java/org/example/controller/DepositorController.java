@@ -2,7 +2,7 @@ package org.example.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.DepositorDTO;
-import org.example.exception.AppResponseMessage;
+import org.example.exception.*;
 import org.example.service.DepositorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
