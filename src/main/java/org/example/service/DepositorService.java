@@ -1,10 +1,12 @@
 package org.example.service;
 
+import org.example.dto.DepositorDTO;
 import org.example.entity.Depositor;
 import org.example.exception.InsufficientBalanceException;
 import org.example.exception.UserNotFoundException;
 import org.example.exception.UserNotFoundException2;
 import org.example.exception.WrongInputMoneyDataFormatException;
+import org.example.mapper.DepositorMapper;
 import org.example.repository.DepositorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,15 +24,26 @@ public class DepositorService  {
     private final int putMoneyOperationType = 1;
     private final int takeMoneyOperationType = 2;
     private final int transferMoneyOperationType = 3;
+
     @Autowired
-    public DepositorService (DepositorRepository depositorRepository, OperationService operationService) {
+    private DepositorService (DepositorRepository depositorRepository, OperationService operationService) {
         this.depositorRepository=depositorRepository;
         this.operationService = operationService;
     }
 
-    public Depositor getDepositor (long id) {
-        return depositorRepository.findById(id).
+    @Autowired
+    private DepositorMapper depositorMapper;
+
+//    public Depositor getDepositor (long id) {
+//        return depositorRepository.findById(id).
+//                orElseThrow(() -> new UserNotFoundException("User with ID=" + id + " not found / not exist."));
+//    }
+
+    public DepositorDTO getDepositor (long id) {
+        var depositor = depositorRepository.findById(id).
                 orElseThrow(() -> new UserNotFoundException("User with ID=" + id + " not found / not exist."));
+        var depositorDTO = depositorMapper.toDTO(depositor);
+        return depositorDTO;
     }
 
     public Depositor getBalance (long depositor_id) {

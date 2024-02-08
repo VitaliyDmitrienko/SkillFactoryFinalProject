@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.dto.DepositorDTO;
 import org.example.exception.AppResponseMessage;
 import org.example.service.DepositorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,17 @@ public class DepositorController {
         return "Hello! It's a greeting page from your web service (test response).";
     }
 
-    @GetMapping("/getDepositor/{depositor_donor_id}")
-    ResponseEntity<?> restGetUserById(@PathVariable Long depositor_donor_id) {
-        return new ResponseEntity<>((depositorService.getDepositor(depositor_donor_id)), HttpStatus.OK);
-    }
+//    @GetMapping("/getDepositor/{depositor_donor_id}")
+//    ResponseEntity<?> restGetUserById(@PathVariable Long depositor_donor_id) {
+//        return new ResponseEntity<>((depositorService.getDepositor(depositor_donor_id)), HttpStatus.OK);
+//    }
 
+    @GetMapping("/getDepositor/{depositor_donor_id}")
+    @ResponseStatus(HttpStatus.OK)
+    DepositorDTO restGetUserById(@PathVariable Long depositor_donor_id) {
+//        return new ResponseEntity<>((depositorService.getDepositor(depositor_donor_id)), HttpStatus.OK);
+        return depositorService.getDepositor(depositor_donor_id);
+    }
     @GetMapping("/getBalance/{depositor_id}")
     ResponseEntity<?> restGetBalanceById(@PathVariable Long depositor_id) {
         return new ResponseEntity<>((depositorService.getBalance(depositor_id)), HttpStatus.OK);

@@ -5,13 +5,22 @@ import lombok.Setter;
 import org.example.dto.DepositorDTO;
 import org.example.entity.Depositor;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.ReportingPolicy;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 //@Controller
-    @Mapper(componentModel = "spring")
+//    @Mapper(componentModel = "spring")
+//@Component
+    @Mapper(
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+        componentModel = MappingConstants.ComponentModel.SPRING,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE
+        )
     public interface DepositorMapper {
-        DepositorDTO toDTO(Depositor depositor);
-
-        Depositor toDepositor(DepositorDTO toDTO);
+        DepositorDTO toDTO (Depositor depositor);
+        Depositor depositor (DepositorDTO toDTO);
     }
 
