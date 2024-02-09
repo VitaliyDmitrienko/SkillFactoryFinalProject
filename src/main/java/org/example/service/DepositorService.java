@@ -22,9 +22,8 @@ public class DepositorService  {
     private DepositorRepository depositorRepository;
     @Autowired
     private final OperationService operationService;
-    private final int putMoneyOperationType = 1;
-    private final int takeMoneyOperationType = 2;
-    private final int transferMoneyOperationType = 3;
+//    @Autowired
+    private DepositorMapper depositorMapper;
 
     @Autowired
     private DepositorService (DepositorRepository depositorRepository, OperationService operationService) {
@@ -32,8 +31,11 @@ public class DepositorService  {
         this.operationService = operationService;
     }
 
-    @Autowired
-    private DepositorMapper depositorMapper;
+    private final int putMoneyOperationType = 1;
+    private final int takeMoneyOperationType = 2;
+    private final int transferMoneyOperationType = 3;
+
+
 
 //    public Depositor getDepositor (long id) {
 //        return depositorRepository.findById(id).

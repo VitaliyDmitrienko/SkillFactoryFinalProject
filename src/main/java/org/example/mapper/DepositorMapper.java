@@ -12,15 +12,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 //@Controller
-//    @Mapper(componentModel = "spring")
+    @Mapper
+//            (componentModel = "spring")
 //@Component
-    @Mapper(
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
-        componentModel = MappingConstants.ComponentModel.SPRING,
-        unmappedTargetPolicy = ReportingPolicy.IGNORE
-        )
-    public interface DepositorMapper {
-        DepositorDTO toDTO (Depositor depositor);
-        Depositor depositor (DepositorDTO toDTO);
+//    @Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+//        componentModel = MappingConstants.ComponentModel.SPRING,
+//        unmappedTargetPolicy = ReportingPolicy.IGNORE)
+//    public interface DepositorMapper {
+    public abstract class DepositorMapper {
+    public abstract DepositorDTO toDTO (Depositor depositor);
+    public abstract Depositor depositor (DepositorDTO toDTO);
     }
 
