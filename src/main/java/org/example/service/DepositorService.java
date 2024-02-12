@@ -22,13 +22,16 @@ public class DepositorService  {
     private DepositorRepository depositorRepository;
     @Autowired
     private final OperationService operationService;
-//    @Autowired
+    @Autowired
     private DepositorMapper depositorMapper;
 
     @Autowired
-    private DepositorService (DepositorRepository depositorRepository, OperationService operationService) {
+    private DepositorService (DepositorRepository depositorRepository, OperationService operationService
+//            , DepositorMapper depositorMapper
+    ) {
         this.depositorRepository=depositorRepository;
         this.operationService = operationService;
+//        this.depositorMapper = depositorMapper;
     }
 
     private final int putMoneyOperationType = 1;
